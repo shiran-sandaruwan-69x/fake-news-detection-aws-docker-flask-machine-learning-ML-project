@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fake News Detection</title>
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    </head>
+    <style>
+        .searchbar{
+            margin-top: 50px;
+            margin-left: 292px;
+            width: 100%;
+        }
+    
+        .bar{
+            border-radius: 40px;
+            box-shadow: 2px 3px 0px -2px #ccc;
+            padding:10px;
+            border:0px;
+            outline: none;
+            border-top: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #CCC;
+            width: 500px;
+        }
+    
+        .bar:hover{
+            box-shadow: 3px 6px 7px -3px #ccc;
+        }
+    
+        .bar:focus {
+            box-shadow: 3px 6px 7px -3px #ccc;
+        }
+    
+        .search-title {
+            font-size: 100px;
+            margin-top: 150px;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5" style="margin-top: 112px; margin-left: 34px;">  
+        <form action="/FakeNews" method="POST">
+            <textarea name="txt" id="first_name" rows="4" cols="50" class="form-control" style="background-color: rgb(0, 0, 0); color: aliceblue; font-weight: bold;">
+            </textarea>
+            <div class="col-md-2" style="margin-top: 18px; margin-left: 143px; max-width: 131px;"> 
+                <input id="tosub" type="submit" name="submit" class="form-control" style="background-color: forestgreen; color: aliceblue; font-size: 16px; font-weight: bold;">
+            </div>
+            
+        </form>
+        <form action="/search" method="POST">
+            <div class="searchbar">
+                <input name="query" type="text submit" placeholder="Search the web" class="bar" value="{{request.form['txt']}}" autocomplete="off" required>
+            </div>
+        </form>
+    </div>   
+        <br/> 
+        <div class="col-md-5" style="margin-top: 112px; margin-left: 143px;">
+            <h3 class="form-control" style="background-color: forestgreen; color: aliceblue; font-weight: bold;">Enterd Text is: </h3>
+            {{ request.form['txt'] }}
+        </div>
+        <div class="col-md-12" style="margin-top: 74px; margin-left: 378px;">
+            <h3 style="font-weight: bold;"> The Ml Model Found That is a :</h3>
+        <p>{% if result == 0 %}
+            <p style="color: red; font-weight: bold;">Fake News</p>
+           {% else  %}
+            <p><p style="color:seagreen; ">True News</p></p>
+           {% endif  %}
+        </p> 
+        </div> 
+    </div>
+    </div>    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+        <script>
+            const input = document.getElementById('first_name');
+            input.setSelectionRange(0, 0);
+            input.focus();
+
+            const btn = document.getElementById('tosub');
+            
+            input.addEventListener('click', function handleClick() {
+                input.setSelectionRange(0, 0);
+                input.focus();
+                });
+
+            btn.addEventListener('click', function handleClick() {
+            input.setSelectionRange(0, 0);
+            input.focus();
+            });
+        </script>
+    </body>
+
+</html>
